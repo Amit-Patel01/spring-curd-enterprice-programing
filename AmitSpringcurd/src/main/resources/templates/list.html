@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Employees</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dfe6e9, #b2bec3);
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2d3436;
+            margin-bottom: 20px;
+        }
+
+        .top-bar {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .add-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            background: #0984e3;
+            color: #fff;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .add-btn:hover {
+            background: #74b9ff;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        th {
+            background: #0984e3;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        tr:nth-child(even) {
+            background: #f5f6fa;
+        }
+
+        tr:hover {
+            background: #dfe6e9;
+        }
+
+        .action-links a {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            margin: 0 3px;
+            transition: 0.3s ease;
+        }
+
+        .edit-btn {
+            background: #00b894;
+        }
+
+        .edit-btn:hover {
+            background: #55efc4;
+        }
+
+        .delete-btn {
+            background: #d63031;
+        }
+
+        .delete-btn:hover {
+            background: #ff7675;
+        }
+    </style>
+</head>
+<body>
+    <h2>Employees</h2>
+    <div class="top-bar">
+        <a th:href="@{/employees/new}" class="add-btn">+ Add Employee</a>
+    </div>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Department</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="emp : ${employees}">
+            <td th:text="${emp.id}"></td>
+            <td th:text="${emp.name}"></td>
+            <td th:text="${emp.email}"></td>
+            <td th:text="${emp.department}"></td>
+            <td class="action-links">
+                <a th:href="@{/employees/edit/{id}(id=${emp.id})}" class="edit-btn">Edit</a>
+                <a th:href="@{/employees/delete/{id}(id=${emp.id})}" class="delete-btn">Delete</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
